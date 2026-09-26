@@ -551,7 +551,7 @@ if [ -f version ]; then
   ui_printfile version;
   ui_print " ";
 fi;
-ui_print " " "AnyKernel3 by osm0sis @ xda-developers" " ";
+ui_print " ";
 grep -oE 'AK_BASE.*' META-INF/com/google/android/updater-script >&2;
 ui_print " ";
 
@@ -567,6 +567,8 @@ ash anykernel.sh;
 if [ $? != 0 ]; then
   abort;
 fi;
+# read the version off the Image before cleanup deletes it, so the flash can close on it
+KVER="$(grep -a -o 'Linux version [0-9][^ ]*' "$AKHOME/Image" 2>/dev/null | head -1 | cut -d' ' -f3)";
 
 do_modules;
 
@@ -578,6 +580,10 @@ if [ "$(file_getprop anykernel.sh do.cleanup)" == 1 ]; then
   cleanup;
 fi;
 
-ui_print " " "Done!";
+if [ "$KVER" ]; then
+  ui_print " " "Done!   $KVER";
+else
+  ui_print " " "Done!";
+fi;
 export PATH="$OLD_PATH";
 unset OLD_PATH OUTFD ZIPFILE;
