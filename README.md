@@ -1,7 +1,7 @@
 # AnyKernel3 — Vajra (redwood)
 
 AnyKernel3 packer for the [Vajra kernel](https://github.com/genie1997/android_kernel_xiaomi_redwood)
-(Xiaomi `redwood` — the POCO X5 Pro 5G and Redmi Note 12 Pro Speed).
+(Xiaomi `redwood` — the POCO X5 Pro 5G).
 
 Kernel-only install: it writes the Image and leaves the ROM's ramdisk alone, so it flashes on top of
 any redwood ROM without a wipe. It also writes the device tree — `dtbo`, and the `dtb` inside
