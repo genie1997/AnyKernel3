@@ -1,19 +1,21 @@
 # AnyKernel3 — Vajra (redwood)
 
 AnyKernel3 packer for the [Vajra kernel](https://github.com/genie1997/android_kernel_xiaomi_redwood)
-(Xiaomi redwood — Redmi Note 13 Pro 5G / POCO X5 Pro 5G).
+(Xiaomi `redwood` — the POCO X5 Pro 5G and Redmi Note 12 Pro Speed).
 
-Kernel-only install: it swaps the boot Image and leaves the ROM's ramdisk alone, so it flashes on
-top of any redwood ROM without a wipe.
+Kernel-only install: it writes the Image and leaves the ROM's ramdisk alone, so it flashes on top of
+any redwood ROM without a wipe. It also writes the device tree — `dtbo`, and the `dtb` inside
+`vendor_boot` — with the same bytes a supported redwood ROM already runs.
 
 ## Pack a zip
 
 ```bash
-./pack.sh out/arch/arm64/boot/Image 1.0
-# -> Vajra-1.0-ksu-redwood-HHMM.zip
+./pack.sh ../out-vajra/arch/arm64/boot/Image 2.1
+# -> ../Vajra-2.1.zip
 ```
 
-Or drop your `Image` in the root and `zip -r9 my.zip * -x .git README.md pack.sh`.
+`dtbo.img` and `yupik.dtb` are read from the `dts` output next to the Image, and the pack stops if
+either drifts from the shipping bytes.
 
 ## Credits
 
